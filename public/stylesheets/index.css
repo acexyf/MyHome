@@ -1,0 +1,10 @@
+.grid li{background: #d5d5d5;}
+.grid li h2{font-size: 15px;background: transparent;color: #fff;font-weight: bold;}
+.grid li p{font-size: 13px;}
+.grid li .details{color: #797979;background: rgba(0, 0, 0, 0.12); margin: 0 -20px; overflow: hidden; position: relative; padding: 0 20px; font-size: 11px;}
+.grid li .details .time{}
+
+
+
+
+
