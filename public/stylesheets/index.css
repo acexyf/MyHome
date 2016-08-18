@@ -1,10 +1,13 @@
-.grid li{background: #d5d5d5;}
-.grid li h2{font-size: 15px;background: transparent;color: #fff;font-weight: bold;}
-.grid li p{font-size: 13px;}
-.grid li .details{color: #797979;background: rgba(0, 0, 0, 0.12); margin: 0 -20px; overflow: hidden; position: relative; padding: 0 20px; font-size: 11px;}
-.grid li .details .time{}
-
-
+.grid li{font-family: 'Microsoft Yahei'}
+.grid li .box{padding: 10px;background: rgba(0, 0, 0, 0.44); -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.44); box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.44); }
+.grid li h2{padding: 8px 0;margin: 0;}
+.grid li h2 a{ color: #dedede;font-size: 15px;background: transparent; font-weight: bold;}
+.grid li h2 a:hover{ color: #86aca3; }
+.grid li p{font-size: 13px;background: transparent;color: #f5f5f5;margin: 0;padding: 5px 0;}
+.grid li .details{color: #AFAFAF; overflow: hidden; font-size: 11px;}
+.grid li .details .time{float: left;}
+.grid li .details .likes{ background: transparent url(../images/icon-like.png) no-repeat 3px 4px;float: right;padding-left: 14px;}
+.grid li .details .favors{background: transparent url(../images/icon-comment.png) no-repeat 3px 4px;float: right;padding-left: 14px;margin-right: 8px;}
 
 
 
