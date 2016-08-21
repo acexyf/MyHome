@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>谢小飞的博客</title>
+	<link rel="icon" href="../public/images/favicon.ico" mce_href="../public/images/favicon.ico" type="image/x-icon">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="../public/stylesheets/default.css" />
+	<link rel="stylesheet" type="text/css" href="../public/stylesheets/component.css" />
+	<link rel="stylesheet" type="text/css" href="../public/stylesheets/index.css">
+	<script src="../public/javascripts/modernizr.custom.js"></script>
+</head>
+<body>
+
+	<div class="container">
+		<header>
+			<h1>My Blog</h1>
+		</header>
+		<ul class="grid effect-2" id="grid">
+			<% if(articles){%>
+				<% articles.forEach(function(article,index){ %>
+					<li>
+						<div class="box">
+							<h2><a href=""><%=article.title %></a></h2>
+							<p><%=article.content %></p>
+							<div class="details">
+								<div class="time" data-time="<%=article.create_time %>"></div>
+								<div class="likes"><%=article.likes %></div>
+								<div class="favors"><%=article.comments %></div>
+							</div>
+						</div>
+					</li>
+				<% }) %>
+			<%	}else{ %>
+				<li>没有文章</li>
+			<%	} %>
+		</ul>
+	</div>
+
+</body>
+
+<script type="text/javascript" src="../public/javascripts/jquery.js"></script>
+<script type="text/javascript" src="../public/javascripts/jquery.backstretch.min.js"></script>
+<script src="../public/javascripts/masonry.pkgd.min.js"></script>
+<script src="../public/javascripts/imagesloaded.js"></script>
+<script src="../public/javascripts/classie.js"></script>
+<script src="../public/javascripts/AnimOnScroll.js"></script>
+<script>
+	new AnimOnScroll(document.getElementById( 'grid' ), {
+		minDuration : 1,
+		maxDuration : 2,
+		viewportFactor : 0
+	});
+	$.backstretch("../public/images/bg/1.jpg");
+</script>
+</html>
