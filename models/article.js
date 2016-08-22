@@ -8,6 +8,8 @@ function Article(article){
 	this.create_time=article.create_time;
 	this.likes=article.likes || 0;
 	this.comments=article.comments || 0;
+	this.tags=article.tags;
+	this.writer=article.writer;
 	this.authority=article.authority || 0;
 }
 
@@ -18,8 +20,8 @@ module.exports=Article;
  * @return {[type]}
  */
 Article.prototype.save=function(callback){
-	var state='insert into blog_article values(?,?,?,?,?,?,?)',
-		param=[this.article_id,this.title,this.content,this.create_time,this.likes,this.comments,this.authority];
+	var state='insert into blog_article values(?,?,?,?,?,?,?,?,?)',
+		param=[this.article_id,this.title,this.content,this.create_time,this.likes,this.comments,this.tags,this.writer,this.authority];
 	db.query(state,param,function(err,result){
 		//db.end();
 		if(err)
@@ -50,7 +52,20 @@ Article.getAll=function(callback){
 }
 
 
+Article.findById=function(id,callback){
+	var state='select * from blog_article where article_id ='+id;
+	db.query(state,function(err,result){
+		if(err)
+			return callback(err);
 
+		if(result){
+			callback(result);
+		}
+		else{
+			callback(null);
+		}
+	});
+}
 
 
 

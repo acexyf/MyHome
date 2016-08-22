@@ -1,10 +1,11 @@
 module.exports = function() {
-	FormatDate();
+	// FormatDate();
+	StringToDate();
 }
 
 /**
  * 格式化日期
- * 实例：new Date().Format("yyyy-MM-dd hh:mm:ss")
+ * 实例：new Date().Format("yyyy-MM-dd hh:mm:ss") ==> 2016-09-16 22:22:22
  */
 function FormatDate() {
 	Date.prototype.Format = function(fmt) { //author: meizz 
@@ -26,3 +27,28 @@ function FormatDate() {
 	}
 }
 
+/**
+ * string类型变成日期
+ * '1471786011401'.toDate() ==> 2016-08-21
+ */
+function StringToDate(){
+	String.prototype.toDate=function(){
+		var fmt='yyyy-MM-dd',
+			that=new Date(parseInt(this));
+		var o = {
+			"M+": that.getMonth() + 1, //月份   
+			"d+": that.getDate(), //日   
+			"h+": that.getHours(), //小时   
+			"m+": that.getMinutes(), //分   
+			"s+": that.getSeconds(), //秒   
+			"q+": Math.floor((that.getMonth() + 3) / 3), //季度   
+			"S": that.getMilliseconds() //毫秒   
+		};
+		if (/(y+)/.test(fmt))
+			fmt = fmt.replace(RegExp.$1, (that.getFullYear() + "").substr(4 - RegExp.$1.length));
+		for (var k in o)
+			if (new RegExp("(" + k + ")").test(fmt))
+				fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+		return fmt;
+	}
+}
