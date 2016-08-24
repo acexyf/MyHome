@@ -1,6 +1,6 @@
-var mysql = require('mysql');
-var database='corner';
-var connection = mysql.createConnection({
+import mysql from 'mysql';
+let database='corner';
+let connection = mysql.createConnection({
   host     : '127.0.0.1',
   user     : 'root',
   password : 'root',

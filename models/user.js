@@ -1,4 +1,4 @@
-var db=require('./db.js');
+import db from './db.js';
 db.connect();
 
 function User(user){
@@ -9,6 +9,7 @@ function User(user){
 	this.phone=user.phone;
 	this.sex=user.sex;
 	this.email=user.email;
+	this.head=user.head;
 	this.authority=user.authority;
 }
 

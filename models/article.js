@@ -1,4 +1,4 @@
-var db=require('./db.js');
+import db from './db.js';
 db.connect();
 
 function Article(article){
@@ -20,7 +20,7 @@ module.exports=Article;
  * @return {[type]}
  */
 Article.prototype.save=function(callback){
-	var state='insert into blog_article values(?,?,?,?,?,?,?,?,?)',
+	let state='insert into blog_article values(?,?,?,?,?,?,?,?,?)',
 		param=[this.article_id,this.title,this.content,this.create_time,this.likes,this.comments,this.tags,this.writer,this.authority];
 	db.query(state,param,function(err,result){
 		//db.end();
@@ -36,7 +36,7 @@ Article.prototype.save=function(callback){
  * @return {[type]}
  */
 Article.getAll=function(callback){
-	var state='select * from blog_article';
+	let state='select * from blog_article';
 	db.query(state,function(err,result){
 		//db.end();
 		if(err)
@@ -53,7 +53,7 @@ Article.getAll=function(callback){
 
 
 Article.findById=function(id,callback){
-	var state='select * from blog_article where article_id ='+id;
+	let state='select * from blog_article where article_id ='+id;
 	db.query(state,function(err,result){
 		if(err)
 			return callback(err);

@@ -1,12 +1,13 @@
-var express=require('express');
-var app=express();
-var path=require('path');
-var port=process.env.PORT || 3000;
-var routes = require('./routes/index.js');
-var favicon = require('serve-favicon');
-var flash=require('connect-flash');
-var session = require('express-session');
-var tool=require('./models/tool.js');
+import express from 'express';
+import routes  from './routes/index.js';
+import favicon from 'serve-favicon';
+import flash from 'connect-flash';
+import session from 'express-session';
+import tool from './models/tool.js';
+import path from 'path';
+
+let app=express();
+let port=process.env.PORT || 3000;
 tool();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -24,10 +25,8 @@ app.use(session({
 	}, //30 days
 }));
 
-var server=app.listen(port,function(){
+let server=app.listen(port,function(){
 	console.log('server is listening on port:'+port);
 });
-
-
 
 
