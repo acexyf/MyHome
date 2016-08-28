@@ -42,8 +42,19 @@ Article.getAll = function(callback) {
 		//db.end();
 		if (err)
 			return callback(err);
-
 		if (result) {
+			//去除html元素
+			for(let elem of result){
+				if(elem.ismarkdown==0){
+					let temp=elem.content;
+					temp = temp.replace(/<[^>]*?>(.*?)/gi,'$1'); //删除左部
+					temp = temp.replace(/(.*?)<\/[^>]*?>/gi,'$1');  //删除右部
+					elem.content=temp;
+				}
+				else{
+
+				}
+			}
 			callback(result);
 		} else {
 			callback([]);
@@ -62,7 +73,6 @@ Article.findById = function(id, callback) {
 	db.query(state, function(err, result) {
 		if (err)
 			return callback(err);
-
 		if (result) {
 			callback(result);
 		} else {
@@ -71,7 +81,12 @@ Article.findById = function(id, callback) {
 	});
 }
 
-
+/**
+ * 文章的喜欢增加1
+ * @param {string}   id       文章id
+ * @param {string}   number   喜欢数量
+ * @param {Function} callback [description]
+ */
 Article.addLike = function(id, number, callback) {
 	let state = 'update blog_article set likes=? where article_id=?',
 		numbers = parseInt(number) + 1;

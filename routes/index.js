@@ -1,6 +1,8 @@
 import path from 'path';
 import article from '../models/article.js';
 import urls from '../models/urls.js';
+var markdown = require("markdown").markdown;
+//console.log( markdown.toHTML( "Hello *World*!" ) );
 
 module.exports = function(app) {
 	app.get(urls.home, function(req, res) {
@@ -40,4 +42,28 @@ module.exports = function(app) {
 			}
 		});
 	});
+
+	app.get('/love',function(req,res){
+		res.render('love', {
+			title: 'love',
+		});
+	});
+
+	app.use(function(req,res){
+		res.render("404");
+	});
+
+	function checkLogin(req,res,next){
+		if(!req.session.user){
+			return res.redirect('/login');
+		}
+		next();
+	}
+
+	function checkNotLogin(req,res,next){
+		if(req.session.user){
+			return res.redirect('back');
+		}
+		next();
+	}
 }
