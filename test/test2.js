@@ -9,6 +9,7 @@ var arr=[{
  	comments:1,
  	tags:'随笔',
  	writer:1,
+ 	ismarkdown:0,
 	authority:0
 },{
 	article_id:0,
@@ -19,6 +20,7 @@ var arr=[{
  	comments:3,
  	tags:'随笔',
  	writer:1,
+ 	ismarkdown:0,
 	authority:0
 },{
 	article_id:0,
@@ -29,6 +31,7 @@ var arr=[{
  	comments:9,
  	tags:'随笔',
  	writer:1,
+ 	ismarkdown:0,
 	authority:0
 }];
 

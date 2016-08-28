@@ -23,7 +23,7 @@
 							<h2><a href="/article?id=<%=article.article_id %>"><%=article.title %></a></h2>
 							<p><%=article.content %></p>
 							<div class="details">
-								<div class="time"><%=article.create_time.toDate() %></div>
+								<div class="time"><%=article.create_time.toDate("yyyy-MM-dd") %></div>
 								<div class="likes"><%=article.likes %></div>
 								<div class="favors"><%=article.comments %></div>
 							</div>
@@ -51,6 +51,6 @@
 		viewportFactor : 0
 	});
 	var bgIndex=$('#bgIndex').val();
-	$.backstretch("../public/images/bg/"+bgIndex+".jpg");
+	$.backstretch("../public/images/bg/"+bgIndex+".jpg",{speed:500});
 </script>
 </html>

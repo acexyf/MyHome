@@ -15,4 +15,20 @@ function User(user){
 
 module.exports=User;
 
-
+/**
+ * 根据用户名找到用户
+ * @param  {string}   username 要查询的用户名
+ * @param  {Function} callback 回掉函数
+ * @return {[type]}            [description]
+ */
+User.findUserByName=function(username,callback){
+	let state='select * from blog_user where username = ?',
+		param=username;
+	db.query(state,param,function(err,result){
+		//db.end();
+		if(err)
+			callback(err);
+		else
+			callback(result);
+	});
+}
