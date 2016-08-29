@@ -1,5 +1,4 @@
 import db from './db.js';
-db.connect();
 
 function User(user){
 	this.userid=user.userid;
@@ -24,11 +23,13 @@ module.exports=User;
 User.findUserByName=function(username,callback){
 	let state='select * from blog_user where username = ?',
 		param=username;
-	db.query(state,param,function(err,result){
-		//db.end();
-		if(err)
-			callback(err);
-		else
-			callback(result);
-	});
+	db.getConnection(function(err,con){
+		con.query(state,param,function(err,result){
+			con.release();
+			if(err)
+				callback(err);
+			else
+				callback(result);
+		});
+	})
 }
