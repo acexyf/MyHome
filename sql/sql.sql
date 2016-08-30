@@ -27,9 +27,11 @@ create table blog_article
     likes long not null,
     comments long not null,
     tags nvarchar(64),
+    category nvarchar(64) not null,
     writer int not null,
     ismarkdown int not null,
     authority int not null,
+    href nvarchar(64),
     constraint fk_writer foreign key (writer) references blog_user(userid)
 );
 

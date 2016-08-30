@@ -9,9 +9,11 @@ function Article(article) {
 	this.likes = article.likes || 0;
 	this.comments = article.comments || 0;
 	this.tags = article.tags;
+	this.category = article.category;
 	this.writer = article.writer;
 	this.ismarkdown = article.ismarkdown || 0;
 	this.authority = article.authority || 0;
+	this.href = article.href || '';
 }
 
 module.exports = Article;
@@ -21,8 +23,8 @@ module.exports = Article;
  * @return {[type]}
  */
 Article.prototype.save = function(callback) {
-	let state = 'insert into blog_article values(?,?,?,?,?,?,?,?,?,?)',
-		param = [this.article_id, this.title, this.content, this.create_time, this.likes, this.comments, this.tags, this.writer, this.ismarkdown, this.authority];
+	let state = 'insert into blog_article values(?,?,?,?,?,?,?,?,?,?,?,?)',
+		param = [this.article_id, this.title, this.content, this.create_time, this.likes, this.comments, this.tags, this.category, this.writer, this.ismarkdown, this.authority, this.href];
 	db.query(state, param, function(err, result) {
 		//db.end();
 		if (err)
