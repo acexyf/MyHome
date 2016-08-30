@@ -21,7 +21,9 @@
 		</div>
 		<h5 class="crumb">
 			<span>评论：<%=article.comments %></span>
+			<% if(article.tags){ %>
 			<span>标签：<%=article.tags.splitWith() %></span>
+			<% } %>
 			<span>发布于：<%=article.create_time.toDate("yyyy-MM-dd") %></span>
 		</h5>
 		<a class="like clearfix" data-id="<%=article.article_id %>">

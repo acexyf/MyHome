@@ -1,0 +1,5 @@
+.user{position: fixed;top: 10px;right: 10px;}
+.user .not-login a{color: #333;background: url(../images/login.png) no-repeat 0 6px;padding-left: 16px}
+
+
+
