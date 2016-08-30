@@ -2,22 +2,23 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title><%=article.title %></title>
+	<title>博文</title>
 	<link rel="icon" href="../public/images/favicon.ico" mce_href="../public/images/favicon.ico" type="image/x-icon">
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="../public/stylesheets/default.css" />
 	<link rel="stylesheet" type="text/css" href="../public/stylesheets/component.css" />
+	<link rel="stylesheet" type="text/css" href="../public/stylesheets/common.css">
 	<link rel="stylesheet" type="text/css" href="../public/stylesheets/article.css">
 	<link rel="stylesheet" type="text/css" href="../public/stylesheets/bootstrap.min.css">
-	<script src="../public/javascripts/modernizr.custom.js"></script>
+	
 </head>
 <body>
-
+	<%- include head %>
 	<div class="container">
 		<h1><%=article.title %></h1>
 		
 		<div class="details">
-			<%=article.content %>
+			<%-article.content %>
 		</div>
 		<h5 class="crumb">
 			<span>评论：<%=article.comments %></span>

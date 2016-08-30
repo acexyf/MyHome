@@ -1,4 +1,5 @@
 import db from './db.js';
+var markdown = require("markdown").markdown;
 
 function Article(article) {
 	this.article_id = article.article_id || 0;
@@ -83,9 +84,9 @@ Article.findById = function(id, callback) {
 		con.query(state, id, function(err, result) {
 			con.release();
 			if (err)
-				callback(err);
-			else
-				callback(result);
+				return callback(err);
+			
+			callback(result);
 		});
 	})
 }
@@ -130,9 +131,24 @@ Article.getArticleFrom = function(rowNum, count, callback) {
 		con.query(state, [rowNum, count], function(err, result) {
 			con.release();
 			if (err)
-				callback(err);
-			else
+				return callback(err);
+			if (result.length) {
+				//去除html元素
+				for (let elem of result) {
+					let temp = '';
+					if (elem.ismarkdown == 0) {
+						temp = elem.content;
+					} else {
+						temp = markdown.toHTML(elem.content);
+					}
+					temp = temp.replace(/<[^>]*?>(.*?)/gi, '$1'); //删除左部
+					temp = temp.replace(/(.*?)<\/[^>]*?>/gi, '$1'); //删除右部
+					elem.content = temp;
+				}
 				callback(result);
+			} else {
+				callback([]);
+			}
 		});
 	});
 }

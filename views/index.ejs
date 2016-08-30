@@ -9,44 +9,52 @@
 	<link rel="stylesheet" type="text/css" href="../public/stylesheets/component.css" />
 	<link rel="stylesheet" type="text/css" href="../public/stylesheets/index.css">
 	<link rel="stylesheet" type="text/css" href="../public/stylesheets/common.css">
-	<script src="../public/javascripts/modernizr.custom.js"></script>
+	<script src="../public/javascripts/index/modernizr.custom.js"></script>
 </head>
 <body>
 	<%- include head %>
 	<div class="container">
 		<header>
-			<h1><%=title %></h1>
+			<h1>
+				<%=title %></h1>
 		</header>
 		<ul class="grid effect-2" id="grid">
 			<% if(articles){%>
-				<% articles.forEach(function(article,index){ %>
-					<li>
-						<div class="box">
-							<h2><a href="/article?id=<%=article.article_id %>"><%=article.title %></a></h2>
-							<p><%=article.content %></p>
-							<div class="details">
-								<div class="time"><%=article.create_time.toDate("yyyy-MM-dd") %></div>
-								<div class="likes"><%=article.likes %></div>
-								<div class="favors"><%=article.comments %></div>
-							</div>
+			<% articles.forEach(function(article,index){ %>
+			<% article.article_id=article.article_id+'' %>
+			<li>
+				<a href="/article/<%=article.article_id.padStart(6,'0') %>
+					">
+					<div class="box">
+						<h2>
+							<%=article.title %></h2>
+						<p>
+							<%- article.content %></p>
+						<div class="details">
+							<div class="time">
+								<%=article.create_time.toDate("yyyy-MM-dd") %></div>
+							<div class="likes">
+								<%=article.likes %></div>
+							<div class="favors">
+								<%=article.comments %></div>
 						</div>
-					</li>
-				<% }) %>
+					</div>
+				</a>
+			</li>
+			<% }) %>
 			<%	}else{ %>
-				<li>没有文章</li>
-			<%	} %>
-		</ul>
+			<li>没有文章</li>
+			<%	} %></ul>
 	</div>
-<input type="hidden" name="" value="<%=bgIndex %>" id="bgIndex">
-</body>
+	<input type="hidden" name="" value="<%=bgIndex %>" id="bgIndex"></body>
 
-<script type="text/javascript" src="../public/javascripts/jquery.js"></script>
-<script type="text/javascript" src="../public/javascripts/jquery.backstretch.min.js"></script>
-<script src="../public/javascripts/masonry.pkgd.min.js"></script>
-<script src="../public/javascripts/imagesloaded.js"></script>
-<script src="../public/javascripts/classie.js"></script>
-<script src="../public/javascripts/AnimOnScroll.js"></script>
-<script>
+	<script type="text/javascript" src="../public/javascripts/jquery.js"></script>
+	<script type="text/javascript" src="../public/javascripts/jquery.backstretch.min.js"></script>
+	<script src="../public/javascripts/index/masonry.pkgd.min.js"></script>
+	<script src="../public/javascripts/index/imagesloaded.js"></script>
+	<script src="../public/javascripts/index/classie.js"></script>
+	<script src="../public/javascripts/index/AnimOnScroll.js"></script>
+	<script>
 	new AnimOnScroll(document.getElementById( 'grid' ), {
 		minDuration : 1,
 		maxDuration : 2,

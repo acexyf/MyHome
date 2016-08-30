@@ -22,7 +22,7 @@ for(let i=0;i<times;i++){
 			newArticle.save(function(result){
 				console.log(result.affectedRows);
 			});
-		},500*i);
+		},10*i);
 	})(i)
 
 }
