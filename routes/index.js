@@ -2,6 +2,8 @@ import path from 'path';
 import urls from './urls.js';
 var markdown = require("markdown").markdown;
 import captchapng from 'captchapng';
+import multerUtil from '../models/multerUtil.js';
+let upload=multerUtil.array('image',5);
 //console.log( markdown.toHTML( "Hello *World*!" ) );
 
 import Article from '../models/article.js';
@@ -15,7 +17,8 @@ module.exports = function(app) {
 			res.render('index', {
 				title: '谢小飞的博客',
 				articles: result,
-				bgIndex: bgIndex
+				bgIndex: bgIndex,
+				user:req.session.user
 			});
 		});
 	});
@@ -25,11 +28,12 @@ module.exports = function(app) {
 			date = new Date(),
 			bgIndex = date.getHours() % 9 + 1;
 		Article.findById(id, function(result) {
-			if(result.length){
+			if(result){
 				res.render('article', {
 					title: 'article',
-					article: result[0],
-					bgIndex: bgIndex
+					article: result,
+					bgIndex: bgIndex,
+					user:req.session.user
 				});
 			}
 			else{
@@ -57,8 +61,13 @@ module.exports = function(app) {
 
 	app.get(urls.login,function(req, res){
 		res.render('login',{
-			title: 'login'
+			title: 'login',
+			user:req.session.user
 		});
+	});
+
+	app.post(urls.login,function(req, res){
+		
 	});
 
 	app.get(urls.verifyCode,function(req,res){
@@ -75,10 +84,23 @@ module.exports = function(app) {
         res.end(imgbase64);
 	});
 
+	//图片上传
+	app.post('/upload',function(req,res){
+		upload(req, res, function (err) {
+		    if (err) {
+		        
+		    }
+		    else{
+			    
+		    }
+		});
+	});
+
 
 	app.get('/love', function(req, res) {
 		res.render('love', {
 			title: 'love',
+			user:req.session.user
 		});
 	});
 

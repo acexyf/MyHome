@@ -19,14 +19,14 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(flash());
 // app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.use('/public',express.static('public'));
-routes(app);
 app.use(session({
-	secret: 'myblog',
-	key: 'blog', //cookie name
+	secret: 'myhome',
+	key: 'index', //cookie name
 	cookie: {
 		maxAge: 1000 * 60 * 60 * 24 * 30
 	}, //30 days
 }));
+routes(app);
 
 let server=app.listen(port,function(){
 	console.log('server is listening on port:'+port);

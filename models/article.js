@@ -85,8 +85,15 @@ Article.findById = function(id, callback) {
 			con.release();
 			if (err)
 				return callback(err);
-			
-			callback(result);
+			if(result.length){
+				if(result[0].ismarkdown){
+					result[0].content=markdown.toHTML(result[0].content);
+				}
+				callback(result[0]);
+			}
+			else{
+				callback(null);
+			}
 		});
 	})
 }
