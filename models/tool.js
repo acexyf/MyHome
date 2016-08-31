@@ -62,4 +62,3 @@ function StringSplit() {
 		return arr.join(' ');
 	}
 }
-

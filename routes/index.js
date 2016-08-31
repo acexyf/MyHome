@@ -1,4 +1,5 @@
 import path from 'path';
+import crypto from 'crypto';
 import urls from './urls.js';
 var markdown = require("markdown").markdown;
 import captchapng from 'captchapng';
@@ -10,6 +11,7 @@ import Article from '../models/article.js';
 import User from '../models/user.js';
 
 module.exports = function(app) {
+	//主页
 	app.get(urls.home, function(req, res) {
 		let date = new Date(),
 			bgIndex = date.getHours() % 9 + 1;
@@ -23,6 +25,7 @@ module.exports = function(app) {
 		});
 	});
 
+	//文章详细
 	app.get(urls.article+'/:id', function(req, res) {
 		let id = req.param('id'),
 			date = new Date(),
@@ -42,23 +45,20 @@ module.exports = function(app) {
 		});
 	});
 
+	//喜欢+1
 	app.post(urls.addLike, function(req, res) {
 		let id = req.body.id || -1,
 			count = req.body.count || -1;
 		Article.addLike(id, count, function(result) {
 			if (result.affectedRows && result.affectedRows == 1) {
-				res.json({
-					"status": true
-				});
+				res.json({'status': true});
 			} else {
-				res.json({
-					"status": false
-				});
+				res.json({'status': false});
 			}
 		});
 	});
 
-
+	//登录
 	app.get(urls.login,function(req, res){
 		res.render('login',{
 			title: 'login',
@@ -66,21 +66,63 @@ module.exports = function(app) {
 		});
 	});
 
+	/**
+	 * 登录
+	 * @param  {[type]} req         [description]
+	 * @param  {[type]} res){		let session_verifycode [description]
+	 * @return {int}     0:数据不完整 
+	 *         			 1:验证码不对 
+	 *         			 2:该用户不存在
+	 *         			 3:密码不对
+	 *         			 4:登录成功
+	 */
 	app.post(urls.login,function(req, res){
-		
+		let session_verifycode=req.session.verifycode,
+			username=req.body.username,
+			password=req.body.password,
+			verifycode=req.body.verifycode;
+		if(session_verifycode&&username&&password&&verifycode){
+			if(session_verifycode==verifycode){
+				User.findUserByName(username,function(result){
+					if(result){
+						let md5 = crypto.createHash('md5'),
+							temp_password=md5.update(req.body.password).digest('hex');
+						if(result.userpwd==temp_password){
+							res.json({'status': true,flag:4,text:'登录成功'});
+							req.session.user=result
+						}
+						else{
+							res.json({'status': false,flag:3,text:'密码不对'});
+						}
+					}
+					else{
+						res.json({'status': false,flag:2,text:'该用户不存在'});
+					}
+				});
+			}
+			else{
+				res.json({'status': false,flag:1,text:'验证码不对'});
+			}
+		}
+		else{
+			res.json({'status': false,flag:0,text:'数据不完整'});
+		}
 	});
 
 	app.get(urls.verifyCode,function(req,res){
-		var code=parseInt(Math.random()*9000+1000);
+		let verifycode=Math.floor(Math.random()*9000+1000);
+		let code=parseInt(verifycode);
         //console.log(code);
-        var p = new captchapng(80,50,code); // width,height,numeric captcha
+        let p = new captchapng(80,50,code); // width,height,numeric captcha
 		p.color(0, 0, 0, 0);  // First color: background (red, green, blue, alpha)
         p.color(0, 0, 0, 200); // Second color: paint (red, green, blue, alpha)
-        var img = p.getBase64();
-        var imgbase64 = new Buffer(img,'base64');
+        let img = p.getBase64();
+        let imgbase64 = new Buffer(img,'base64');
+        req.session.verifycode=verifycode;
         res.writeHead(200, {
             'Content-Type': 'image/png'
         });
+
         res.end(imgbase64);
 	});
 

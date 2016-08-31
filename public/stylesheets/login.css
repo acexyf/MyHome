@@ -102,10 +102,11 @@ body{
     height: .5rem;
 }
 
-.login_wrapper .input-btn input{
+.login_wrapper .input-btn #submitBtn{
 	display: block;
 	width: 2.6rem;
-	height: 0.5rem;
+	height: .5rem;
+	line-height: .5rem;
 	background: url(../images/login/login-btn.png) no-repeat;
 	background-size: 100% 100%;
 	border:0;
@@ -115,9 +116,6 @@ body{
 	font-weight: bold;
 	font-size: .2rem;
 	outline: 0;
-}
-.login_wrapper .input-btn input:hover{
-	cursor: pointer;
 }
 .input-code .code-wrapper{
 	width: 1.6rem;

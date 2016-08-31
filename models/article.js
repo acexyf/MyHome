@@ -85,13 +85,12 @@ Article.findById = function(id, callback) {
 			con.release();
 			if (err)
 				return callback(err);
-			if(result.length){
-				if(result[0].ismarkdown){
-					result[0].content=markdown.toHTML(result[0].content);
+			if (result.length) {
+				if (result[0].ismarkdown) {
+					result[0].content = markdown.toHTML(result[0].content);
 				}
 				callback(result[0]);
-			}
-			else{
+			} else {
 				callback(null);
 			}
 		});

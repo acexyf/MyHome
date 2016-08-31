@@ -1,32 +1,31 @@
 var multer = require('multer');
 var fs = require('fs');
-var paths=require('path');
+var paths = require('path');
 var storage = multer.diskStorage({
-      //设置上传后文件路径，uploads文件夹会自动创建。
-      destination: function (req, file, cb) {
-          let route=new Date().Format('yyyyMMdd');
-          let path='D:/MyConfiguration/xyf17469/Desktop/ImageUpload/public/images/'+route+'/';
-          fs.exists(path,function(result){
-            if(result){
-              cb(null, './public/images/'+route+'/');
-            }
-            else{
-              fs.mkdir(path,function(){
-                cb(null, './public/images/'+route+'/');
-              });
-            }
-          });
-      }, 
-      //给上传文件重命名，获取添加后缀名
-      filename: function (req, file, cb) {
-          var fileFormat = (file.originalname).split(".");
-          //console.log(file.fieldname + '-' + Date.now() + "." + fileFormat[fileFormat.length - 1]);
-          cb(null, file.originalname);
+  //设置上传后文件路径，uploads文件夹会自动创建。
+  destination: function(req, file, cb) {
+    let route = new Date().Format('yyyyMMdd');
+    let path = 'D:/MyConfiguration/xyf17469/Desktop/ImageUpload/public/images/' + route + '/';
+    fs.exists(path, function(result) {
+      if (result) {
+        cb(null, './public/images/' + route + '/');
+      } else {
+        fs.mkdir(path, function() {
+          cb(null, './public/images/' + route + '/');
+        });
       }
- });
+    });
+  },
+  //给上传文件重命名，获取添加后缀名
+  filename: function(req, file, cb) {
+    var fileFormat = (file.originalname).split(".");
+    //console.log(file.fieldname + '-' + Date.now() + "." + fileFormat[fileFormat.length - 1]);
+    cb(null, file.originalname);
+  }
+});
 //添加配置文件到muler对象。
 var upload = multer({
-      storage: storage
+  storage: storage
 });
 
 module.exports = upload;
