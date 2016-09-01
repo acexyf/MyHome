@@ -29,9 +29,11 @@ User.findUserByName = function(username, callback) {
 		con.query(state, param, function(err, result) {
 			con.release();
 			if (err)
-				callback(err);
+				return callback(err);
+			if(result.length)
+				callback(result[0]);
 			else
-				callback(result);
+				callback(null);
 		});
 	})
 }
