@@ -7,7 +7,6 @@ $(function(){
 	});
 	$('#submitBtn').on('click',function(e){
 		e.preventDefault();
-		alert(123);
 		if(flags)
 			return;
 		var username=$('#username').val();
@@ -39,6 +38,7 @@ $(function(){
 					if(data.status){
 						//登录成功
 						console.log('登录成功');
+						window.location.href='/';
 					}
 					else{
 						if(data.flag==0){	

@@ -1,5 +1,21 @@
 <div class="user">
-	<div class="not-login">
-		<a href="/login">登录</a>
-	</div>
+	<% if(user){ %>
+		<div class="logined">
+		<%if(user.head){ %>
+			<img src="<%=user.head %>" alt="">
+		<%}else{ %>
+			<img src="../public/images/user/lazy.jpg"  alt="">
+		<%} %>
+		<i class="tri"></i>
+		<ul class="dropList none">
+			<li>写文章</li>
+			<li>帮助</li>
+			<li>登出</li>
+		</ul>
+		</div>
+	<%}else{ %>
+		<div class="not-login">
+			<a href="/login">登录</a>
+		</div>
+	<%} %>
 </div>

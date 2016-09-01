@@ -88,8 +88,8 @@ module.exports = function(app) {
 						let md5 = crypto.createHash('md5'),
 							temp_password=md5.update(req.body.password).digest('hex');
 						if(result.userpwd==temp_password){
+							req.session.user=result;
 							res.json({'status': true,flag:4,text:'登录成功'});
-							req.session.user=result
 						}
 						else{
 							res.json({'status': false,flag:3,text:'密码不对'});
@@ -109,10 +109,14 @@ module.exports = function(app) {
 		}
 	});
 
+	app.get(urls.logout,function(req,res){
+		req.session.user=null;
+		res.redirect('back');
+	});
+
 	app.get(urls.verifyCode,function(req,res){
 		let verifycode=Math.floor(Math.random()*9000+1000);
 		let code=parseInt(verifycode);
-        //console.log(code);
         let p = new captchapng(80,50,code); // width,height,numeric captcha
 		p.color(0, 0, 0, 0);  // First color: background (red, green, blue, alpha)
         p.color(0, 0, 0, 200); // Second color: paint (red, green, blue, alpha)
@@ -122,18 +126,18 @@ module.exports = function(app) {
         res.writeHead(200, {
             'Content-Type': 'image/png'
         });
-
         res.end(imgbase64);
 	});
 
 	//图片上传
+	app.post('/upload',checkLogin);
 	app.post('/upload',function(req,res){
 		upload(req, res, function (err) {
 		    if (err) {
-		        
+				
 		    }
 		    else{
-			    
+				
 		    }
 		});
 	});
