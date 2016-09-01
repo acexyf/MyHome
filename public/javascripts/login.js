@@ -1,5 +1,5 @@
 $(function(){
-	let version=10,
+	var version=10,
 		flags=false;
 	$('.input-code img').on('click',function(){
 		$(this).attr('src','/verifyCode?v='+version);
@@ -10,17 +10,17 @@ $(function(){
 		alert(123);
 		if(flags)
 			return;
-		let username=$('#username').val();
+		var username=$('#username').val();
 		if(!username){
 			shake($('.name-box'));
 			return;
 		}
-		let password=$('#password').val();
+		var password=$('#password').val();
 		if(!password){
 			shake($('.pwd-box'));
 			return;
 		}
-		let verifycode=$('#verifycode').val();
+		var verifycode=$('#verifycode').val();
 		if(!verifycode){
 			shake($('.code-wrapper'));
 			return;
