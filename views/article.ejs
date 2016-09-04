@@ -5,12 +5,12 @@
 	<title><%=article.title %></title>
 	<link rel="icon" href="../public/images/favicon.ico" mce_href="../public/images/favicon.ico" type="image/x-icon">
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-	<link rel="stylesheet" type="text/css" href="../public/stylesheets/default.css" />
-	<link rel="stylesheet" type="text/css" href="../public/stylesheets/component.css" />
+	<script type="text/javascript">
+        document.documentElement.style.fontSize = window.innerWidth / 6.4 + "px";
+    </script>
+	<link rel="stylesheet" type="text/css" href="../public/stylesheets/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../public/stylesheets/common.css">
 	<link rel="stylesheet" type="text/css" href="../public/stylesheets/article.css">
-	<link rel="stylesheet" type="text/css" href="../public/stylesheets/bootstrap.min.css">
-	
 </head>
 <body>
 	<%- include head %>
@@ -40,40 +40,6 @@
 <script type="text/javascript" src="../public/javascripts/jquery.js"></script>
 <script type="text/javascript" src="../public/javascripts/jquery.backstretch.min.js"></script>
 <script type="text/javascript" src="../public/javascripts/bootstrap.min.js"></script>
-<script>
-	var bgIndex=$('#bgIndex').val();
-	$.backstretch("../public/images/bg/"+bgIndex+".jpg",{speed:500});
-	var likes={
-		wrap:null,
-		id:-1,
-		count:-1,
-		init:function(){
-			var that=this;
-			this.wrap=$('.like');
-			this.id=this.wrap.data('id');
-			this.count=$('.likes-count span',this.wrap).html();
-			this.wrap.on('click',function(){
-				if($(that.wrap).hasClass('disabled'))
-					return;
-				$.ajax({
-					url:'/addLike',
-					dataType:'json',
-					type:'post',
-					data:{
-						id:that.id,
-						count:that.count
-					},
-					success:function(data){
-						if(data && data.status){
-							$(that.wrap).addClass('disabled');
-							let temp_count=$('.likes-count span',this.wrap).html()
-							$('.likes-count span',this.wrap).html(parseInt(temp_count)+1)
-						}
-					}
-				});
-			});
-		}
-	}
-	likes.init();
-</script>
+<script type="text/javascript" src="../public/javascripts/article.js"></script>
+<script type="text/javascript" src="../public/javascripts/common.js"></script>
 </html>

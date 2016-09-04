@@ -2,20 +2,22 @@
 	<% if(user){ %>
 		<div class="logined">
 		<%if(user.head){ %>
-			<img src="<%=user.head %>" alt="">
+			<img class="headImg" src="<%=user.head %>" alt="">
 		<%}else{ %>
-			<img src="../public/images/user/lazy.jpg"  alt="">
+			<img class="headImg" src="../public/images/user/lazy.jpg"  alt="">
 		<%} %>
 		<i class="tri"></i>
 		<ul class="dropList none">
-			<li>写文章</li>
-			<li>帮助</li>
-			<li>登出</li>
+			<li><a href="/">主页</a></li>
+			<li><a href="/write">写文章</a></li>
+			<li><a href="">帮助</a></li>
+			<li><a href="/logout">登出</a></li>
 		</ul>
 		</div>
 	<%}else{ %>
 		<div class="not-login">
-			<a href="/login">登录</a>
+			<a class="home" href="/">主页</a>
+			<a class="login" href="/login">登录</a>
 		</div>
 	<%} %>
 </div>

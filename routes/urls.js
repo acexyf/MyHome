@@ -4,6 +4,7 @@ let urls = {
 	addLike:'/addLike',
 	login:'/login',
 	logout:'/logout',
-	verifyCode:'/verifyCode'
+	verifyCode:'/verifyCode',
+	write:'/write'
 }
 module.exports = urls;

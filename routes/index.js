@@ -109,11 +109,22 @@ module.exports = function(app) {
 		}
 	});
 
+	//登出
 	app.get(urls.logout,function(req,res){
 		req.session.user=null;
 		res.redirect('back');
 	});
 
+	//写文章
+	app.get(urls.write,checkLogin);
+	app.get(urls.write,function(req,res){
+		res.render('write',{
+			title: 'write',
+			user:req.session.user
+		});
+	});
+
+	//验证码图片
 	app.get(urls.verifyCode,function(req,res){
 		let verifycode=Math.floor(Math.random()*9000+1000);
 		let code=parseInt(verifycode);

@@ -5,10 +5,14 @@
 	<link rel="icon" href="../public/images/favicon.ico" mce_href="../public/images/favicon.ico" type="image/x-icon">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<script type="text/javascript">
+        document.documentElement.style.fontSize = window.innerWidth / 6.4 + "px";
+    </script>
 	<link rel="stylesheet" type="text/css" href="../public/stylesheets/default.css" />
 	<link rel="stylesheet" type="text/css" href="../public/stylesheets/component.css" />
-	<link rel="stylesheet" type="text/css" href="../public/stylesheets/index.css">
+	<link rel="stylesheet" type="text/css" href="../public/stylesheets/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../public/stylesheets/common.css">
+	<link rel="stylesheet" type="text/css" href="../public/stylesheets/index.css">
 	<script src="../public/javascripts/index/modernizr.custom.js"></script>
 </head>
 <body>
@@ -23,23 +27,41 @@
 			<% articles.forEach(function(article,index){ %>
 			<% article.article_id=article.article_id+'' %>
 			<li>
-				<a href="/article/<%=article.article_id.padStart(6,'0') %>
-					">
-					<div class="box">
-						<h2>
-							<%=article.title %></h2>
-						<p>
-							<%- article.content %></p>
-						<div class="details">
-							<div class="time">
-								<%=article.create_time.toDate("yyyy-MM-dd") %></div>
-							<div class="likes">
-								<%=article.likes %></div>
-							<div class="favors">
-								<%=article.comments %></div>
+				<% if(!article.href){ %>
+					<a href="/article/<%=article.article_id.padStart(6,'0') %> ">
+						<div class="box">
+							<h2>
+								<%=article.title %></h2>
+							<p>
+								<%- article.content %></p>
+							<div class="details">
+								<div class="time">
+									<%=article.create_time.toDate("yyyy-MM-dd") %></div>
+								<div class="likes">
+									<%=article.likes %></div>
+								<div class="favors">
+									<%=article.comments %></div>
+							</div>
 						</div>
-					</div>
-				</a>
+					</a>
+				<%}else{ %>
+					<a href="<%=article.href %> ">
+						<div class="box">
+							<h2>
+								<%=article.title %></h2>
+							<p>
+								<%- article.content %></p>
+							<div class="details">
+								<div class="time">
+									<%=article.create_time.toDate("yyyy-MM-dd") %></div>
+								<div class="likes">
+									<%=article.likes %></div>
+								<div class="favors">
+									<%=article.comments %></div>
+							</div>
+						</div>
+					</a>
+				<%} %>
 			</li>
 			<% }) %>
 			<%	}else{ %>
